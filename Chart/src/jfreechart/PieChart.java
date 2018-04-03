@@ -1,9 +1,13 @@
 package jfreechart;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.JPanel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
@@ -36,6 +40,16 @@ public class PieChart extends ApplicationFrame {
 				dataset, // data
 				true, // include legend
 				false, false);
+
+		int width = 640; /* Width of the image */
+		int height = 480; /* Height of the image */
+		File pieChart = new File("PieChart.jpeg");
+		try {
+			ChartUtilities.saveChartAsJPEG(pieChart, chart, width, height);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return chart;
 	}

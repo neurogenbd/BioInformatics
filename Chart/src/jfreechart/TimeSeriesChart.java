@@ -1,7 +1,11 @@
 package jfreechart;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.SeriesException;
 import org.jfree.data.time.Second;
@@ -26,7 +30,18 @@ public class TimeSeriesChart extends ApplicationFrame {
 	}
 
 	private JFreeChart createChart(final XYDataset dataset) {
-		return ChartFactory.createTimeSeriesChart("Computing Test", "Seconds", "Value", dataset, false, false, false);
+		JFreeChart chart = ChartFactory.createTimeSeriesChart("Computing Test", "Seconds", "Value", dataset, false,
+				false, false);
+		int width = 640; /* Width of the image */
+		int height = 480; /* Height of the image */
+		File TimeChart = new File("TimeSeriesChart.jpeg");
+		try {
+			ChartUtilities.saveChartAsJPEG(TimeChart, chart, width, height);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return chart;
 	}
 
 	private XYDataset createDataset() {
